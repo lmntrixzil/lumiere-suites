@@ -63,7 +63,7 @@ export default async function HomePage() {
 
       {/* ------------------------------ INTRO ------------------------------ */}
       <section className="grid-lines py-24 sm:py-36">
-        <div className="container-x grid gap-14 lg:grid-cols-[0.8fr_1.6fr]">
+        <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-[0.8fr_1.6fr]">
           <Reveal>
             <p className="eyebrow text-bronze">The Lumière way</p>
             <span className="gold-rule mt-5" />
@@ -115,7 +115,7 @@ export default async function HomePage() {
               All apartments <Icon name="arrow" className="h-4 w-4" />
             </Link>
           </div>
-          <div className="no-scrollbar -mx-4 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0">
+          <div className="no-scrollbar -mx-4 mt-14 flex snap-x snap-mandatory scroll-px-4 gap-5 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0">
             {featured.map((a, i) => (
               <Reveal key={a.id} delay={i * 120} className="w-[82vw] shrink-0 snap-start md:w-auto">
                 <ApartmentCard apt={a} />
@@ -129,7 +129,7 @@ export default async function HomePage() {
       <section className="bg-cream/60 py-24 sm:py-32">
         <div className="container-x">
           <SectionHeading eyebrow="Our locations" title="Two neighbourhoods. One standard." align="center" />
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
             {Object.values(locations).map((l, i) => {
               const count = apartments.filter((a) => a.location === l.slug).length;
               return (
@@ -156,7 +156,7 @@ export default async function HomePage() {
 
       {/* ------------------------------ CAR TEASER ------------------------------ */}
       <section className="relative overflow-hidden bg-ink py-24 text-ivory sm:py-32">
-        <div className="container-x grid items-center gap-14 lg:grid-cols-2">
+        <div className="container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
           <div>
             <SectionHeading
               tone="dark"
@@ -169,7 +169,7 @@ export default async function HomePage() {
               intro="Add a car to any stay, or book one on its own. Uniformed chauffeurs who know the island, or the keys for a self-drive. From airport arrivals to a late dinner in VI."
             />
             <Reveal delay={150}>
-              <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+              <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
                   ["plane", "MMIA airport pickup", "We track your flight; delays cost you nothing."],
                   ["chauffeur", "Chauffeur or self-drive", "Vetted, uniformed and discreet drivers."],
@@ -236,7 +236,7 @@ export default async function HomePage() {
       <section className="grid-lines py-24 sm:py-32">
         <div className="container-x">
           <SectionHeading eyebrow="How it works" title="One booking. Everything arranged." />
-          <ol className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 120} className="bg-ivory p-8">
                 <span className="font-serif text-6xl font-light text-gold">{String(i + 1).padStart(2, "0")}</span>

@@ -23,7 +23,7 @@ export default function FaqPage() {
         }}
       />
       <PageHero eyebrow="Good to know" title="Questions, answered" image="photo-1616486338812-3dadae4b4ace" alt="Neutral living room" size="sm" />
-      <section className="container-x grid gap-12 py-16 sm:py-24 lg:grid-cols-[240px_1fr]">
+      <section className="container-x grid grid-cols-1 gap-12 py-16 sm:py-24 lg:grid-cols-[240px_1fr]">
         <nav aria-label="FAQ sections" className="lg:sticky lg:top-28 lg:h-fit">
           <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-3">
             {faqGroups.map((g) => (

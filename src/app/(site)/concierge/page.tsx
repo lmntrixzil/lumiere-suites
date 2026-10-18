@@ -27,7 +27,7 @@ export default function ConciergePage() {
         alt="A chef finishing a plated dish"
       />
       <section className="grid-lines py-20 sm:py-28">
-        <div className="container-x grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="container-x grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {experiences.map((x, i) => (
             <Reveal key={x.slug} delay={(i % 3) * 120} as="article">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
@@ -41,7 +41,7 @@ export default function ConciergePage() {
         </div>
       </section>
       <section id="request" className="bg-cream/60 py-20 sm:py-28">
-        <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+        <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="Make a request" title="Tell us what you have in mind" intro="Requests are confirmed with a quote before anything is booked. Already staying with us? Include your booking reference." />
           <EnquiryForm kind="concierge" services={experiences.map((x) => x.title)} />
         </div>

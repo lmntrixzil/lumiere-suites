@@ -30,7 +30,7 @@ export function PricingManager({ settings, codes, blank }: { settings: Settings;
   const n = (k: keyof Settings) => ({ value: s[k] as number, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setS({ ...s, [k]: Number(e.target.value) }) });
 
   return (
-    <div className="grid gap-8 xl:grid-cols-2">
+    <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
       <form onSubmit={saveSettings} className="space-y-4 rounded-2xl border border-line bg-white p-6">
         <h2 className="font-serif text-3xl">Pricing rules</h2>
         <div className="grid grid-cols-2 gap-4">

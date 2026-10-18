@@ -109,7 +109,7 @@ export function BookingsTable({ bookings, compact = false }: { bookings: Booking
                 {open === b.id && (
                   <tr className="border-b border-line bg-ivory/70">
                     <td colSpan={6} className="p-5">
-                      <div className="grid gap-6 text-sm sm:grid-cols-3">
+                      <div className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-3">
                         <div>
                           <p className="label">Guest</p>
                           <p>{b.guest.name}</p>

@@ -34,6 +34,8 @@ export const viewport: Viewport = {
   themeColor: "#0E1116",
   width: "device-width",
   initialScale: 1,
+  // Lets bottom bars use env(safe-area-inset-bottom) on notched phones.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

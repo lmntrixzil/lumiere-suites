@@ -104,6 +104,15 @@ body {
   @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-10;
 }
 
+/* iOS Safari zooms into any field under 16px when tapped; keep phones at 16px. */
+@media (max-width: 639px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* Faint vertical guide lines across light sections (white-desert.com motif) */
 .grid-lines {
   background-image: linear-gradient(to right, rgb(14 17 22 / 0.045) 1px, transparent 1px);

@@ -214,8 +214,9 @@ export function DateRangeField({
           </span>
         )}
       </button>
+      {open && <div aria-hidden="true" className="fixed inset-0 z-40 bg-ink/45 animate-fade sm:hidden" />}
       {open && (
-        <div className={`absolute left-0 ${placement === "top" ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)]"} z-50 w-[min(92vw,640px)] rounded-2xl border border-line bg-white p-5 text-ink shadow-[0_30px_80px_-20px_rgba(14,17,22,0.35)] animate-fade max-sm:fixed max-sm:inset-x-3 max-sm:top-auto max-sm:bottom-3 max-sm:w-auto`}>
+        <div role="dialog" aria-label="Choose dates" className={`absolute left-0 ${placement === "top" ? "bottom-[calc(100%+14px)]" : "top-[calc(100%+14px)]"} z-50 w-[min(92vw,640px)] rounded-2xl border border-line bg-white p-5 text-ink shadow-[0_30px_80px_-20px_rgba(14,17,22,0.35)] animate-fade max-sm:fixed max-sm:inset-x-3 max-sm:top-auto max-sm:bottom-[max(0.75rem,env(safe-area-inset-bottom))] max-sm:max-h-[85svh] max-sm:overflow-y-auto max-sm:p-4`}>
           <RangeCalendar value={value} onChange={handle} blocked={blocked} minNights={minNights} single={single} />
           {!single && value.from && value.to && (
             <p className="mt-3 border-t border-line pt-3 text-sm text-stone">

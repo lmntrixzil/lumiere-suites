@@ -28,6 +28,7 @@ type Props = {
 };
 
 const STEPS = ["Stay", "Car", "Your details", "Payment"] as const;
+const SHORT = ["Stay", "Car", "Details", "Pay"];
 
 declare global {
   interface Window {
@@ -94,6 +95,11 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
     if (wantStay && dates.from && !params.get("start")) setCarStart(dates.from);
     if (wantStay && nights && !params.get("units")) setUnits(nights);
   }, [wantStay, dates.from, nights, params]);
+
+  // Bring validation messages into view (the phone action bar sits far from them).
+  useEffect(() => {
+    if (error) document.getElementById("checkout-error")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [error]);
 
   // Self-drive not available on hourly or chauffeur-only cars.
   const effectiveMode: DriveMode = car && car.selfDrive && rateType !== "hourly" ? mode : "chauffeur";
@@ -336,7 +342,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
   );
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_380px]">
       <div className="min-w-0">
         {/* Progress */}
         <ol className="mb-10 grid grid-cols-4 gap-2" aria-label="Checkout progress">
@@ -347,12 +353,12 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
                 onClick={() => i < step && setStep(i)}
                 disabled={i > step}
                 aria-current={i === step ? "step" : undefined}
-                className="group w-full text-left disabled:cursor-default"
+                className="group w-full py-2 text-left disabled:cursor-default"
               >
                 <span className={`block h-0.5 rounded-full transition ${i <= step ? "bg-gold" : "bg-line"}`} />
                 <span className={`mt-3 block text-[0.62rem] font-medium uppercase tracking-[0.22em] ${i === step ? "text-ink" : "text-stone"}`}>
-                  <span className="hidden sm:inline">Step {i + 1} · </span>
-                  {s}
+                  <span className="hidden sm:inline">Step {i + 1} · {s}</span>
+                  <span className="sm:hidden">{SHORT[i]}</span>
                   {i === 1 && <span className="hidden normal-case tracking-normal text-mist sm:inline"> (optional)</span>}
                 </span>
               </button>
@@ -366,7 +372,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
             <h2 id="s1" className="font-serif text-4xl sm:text-5xl">
               Where would you like to stay?
             </h2>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {apartments.map((a) => (
                 <button key={a.id} type="button" onClick={() => (setWantStay(true), setAptId(a.id))} className={`${optionCls(wantStay && aptId === a.id)} flex gap-4`} aria-pressed={wantStay && aptId === a.id}>
                   <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
@@ -387,7 +393,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
             </button>
 
             {apartment && (
-              <div className="mt-10 grid gap-8 xl:grid-cols-[1fr_220px]">
+              <div className="mt-10 grid grid-cols-1 gap-8 xl:grid-cols-[1fr_220px]">
                 <div className="card p-5">
                   <RangeCalendar value={dates} onChange={setDates} blocked={aptBlocked[apartment.id]} minNights={apartment.minNights} />
                 </div>
@@ -425,14 +431,14 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
 
             {wantCar && (
               <div className="mt-8 space-y-8">
-                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {cars.map((c) => (
-                    <button key={c.id} type="button" onClick={() => setCarId(c.id)} className={`${optionCls(carId === c.id, "p-0")} overflow-hidden`} aria-pressed={carId === c.id}>
-                      <span className="relative block aspect-[16/9]">
+                    <button key={c.id} type="button" onClick={() => setCarId(c.id)} className={`${optionCls(carId === c.id, "p-0")} flex overflow-hidden sm:block`} aria-pressed={carId === c.id}>
+                      <span className="relative block w-28 shrink-0 sm:aspect-[16/9] sm:w-auto">
                         <Photo src={c.photo.src} alt="" fill sizes="300px" className="object-cover" />
                       </span>
-                      <span className="block p-4">
-                        <span className="block font-serif text-xl leading-tight">{c.name}</span>
+                      <span className="block min-w-0 p-3 sm:p-4">
+                        <span className="block font-serif text-lg leading-tight sm:text-xl">{c.name}</span>
                         <span className="text-xs text-stone">
                           {c.seats} seats · {c.selfDrive ? "Chauffeur or self-drive" : "Chauffeur only"}
                         </span>
@@ -443,7 +449,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
                 </div>
 
                 {car && (
-                  <div className="card grid gap-6 p-6 sm:grid-cols-2">
+                  <div className="card grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
                     <div>
                       <p className="label">Hire by the</p>
                       <div className="inline-flex rounded-full border border-line p-1">
@@ -506,7 +512,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
             <h2 id="s3" className="font-serif text-4xl sm:text-5xl">
               Your details
             </h2>
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <label htmlFor="name" className="label">
                   Full name (as on your ID)
@@ -597,7 +603,7 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
             {method === "transfer" && (
               <div className="mt-5 rounded-2xl bg-ink p-6 text-ivory">
                 <p className="eyebrow text-gold">Transfer to</p>
-                <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
+                <dl className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
                   <div>
                     <dt className="text-ivory/60">Bank</dt>
                     <dd className="font-serif text-xl">{site.bank.bankName}</dd>
@@ -632,11 +638,11 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
 
         {/* Navigation */}
         {error && (
-          <p role="alert" className="mt-8 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <p id="checkout-error" role="alert" className="mt-8 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
             {error}
           </p>
         )}
-        <div className="mt-10 flex items-center justify-between gap-4 border-t border-line pt-6">
+        <div className="mt-10 hidden items-center justify-between gap-4 border-t border-line pt-6 lg:flex">
           {step > 0 ? (
             <button type="button" onClick={back} className="btn-ghost">
               <Icon name="arrow-left" className="h-4 w-4" /> Back
@@ -659,7 +665,31 @@ export function Checkout({ apartments, cars, settings, aptBlocked, carBlocked, p
         </p>
       </div>
 
-      <aside className="lg:sticky lg:top-28 lg:h-fit">{summary}</aside>
+      <aside id="summary" className="scroll-mt-24 pb-24 lg:sticky lg:top-28 lg:h-fit lg:pb-0">{summary}</aside>
+
+      {/* Phones and tablets: sticky bar with the live total and the next action */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-ivory/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur lg:hidden">
+        <div className="flex items-center gap-3">
+          {step > 0 && (
+            <button type="button" onClick={back} aria-label="Back" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/20">
+              <Icon name="arrow-left" className="h-4 w-4" />
+            </button>
+          )}
+          <a href="#summary" className="min-w-0 flex-1">
+            <span className="block text-[0.62rem] uppercase tracking-[0.2em] text-stone">{quote.lines.length ? "Total · view" : "Your booking"}</span>
+            <span className="block truncate font-serif text-2xl leading-tight">{quote.lines.length ? money(quote.total) : "—"}</span>
+          </a>
+          {step < 3 ? (
+            <button type="button" onClick={next} className="btn-ink shrink-0 px-5">
+              Continue
+            </button>
+          ) : (
+            <button type="button" onClick={pay} disabled={busy} className="btn-gold shrink-0 px-5">
+              {busy ? "…" : method === "transfer" ? "Confirm" : "Pay now"}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

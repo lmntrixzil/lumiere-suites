@@ -37,7 +37,7 @@ export function EnquiryForm({ kind, services }: { kind: "concierge" | "contact";
   }
 
   return (
-    <form onSubmit={submit} className="card grid gap-5 p-6 sm:grid-cols-2 sm:p-8">
+    <form onSubmit={submit} className="card grid grid-cols-1 gap-5 p-6 sm:grid-cols-2 sm:p-8">
       {services && (
         <fieldset className="sm:col-span-2">
           <legend className="label">What can we arrange?</legend>

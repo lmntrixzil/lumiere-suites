@@ -50,7 +50,7 @@ export function CarForm({ initial, isNew }: { initial: Car; isNew: boolean }) {
       </div>
 
       <div className={section}>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div><label className="label" htmlFor="cname">Name</label><input id="cname" required value={c.name} onChange={(e) => set("name", e.target.value)} className="field-box" /></div>
           <div><label className="label" htmlFor="cat">Category</label><input id="cat" value={c.category} onChange={(e) => set("category", e.target.value)} className="field-box" /></div>
           <div><label className="label">Seats</label><input type="number" min={1} value={c.seats} onChange={(e) => set("seats", Number(e.target.value))} className="field-box" /></div>

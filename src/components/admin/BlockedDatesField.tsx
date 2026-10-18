@@ -20,7 +20,7 @@ export function BlockedDatesField({ value, onChange }: { value: string[]; onChan
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_260px]">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_260px]">
       <div className="rounded-xl border border-line bg-white p-4">
         {/* `blocked` is empty here so already-blocked dates can be selected to unblock them */}
         <RangeCalendar value={range} onChange={setRange} />

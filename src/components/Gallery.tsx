@@ -1,12 +1,22 @@
 "use client";
 /** Editorial photo grid with a keyboard-friendly full-screen lightbox. */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Photo as PhotoT } from "@/lib/types";
 import { Icon } from "./icons/Icon";
 import { Photo } from "./Photo";
 
 export function Gallery({ photos, name }: { photos: PhotoT[]; name: string }) {
   const [open, setOpen] = useState<number | null>(null);
+  const [slide, setSlide] = useState(0);
+  const touchX = useRef<number | null>(null);
+  // Swipe left/right in the lightbox.
+  const onTouchStart = (e: React.TouchEvent) => (touchX.current = e.touches[0].clientX);
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    touchX.current = null;
+  };
   const go = useCallback((d: number) => setOpen((i) => (i === null ? i : (i + d + photos.length) % photos.length)), [photos.length]);
 
   useEffect(() => {
@@ -33,8 +43,30 @@ export function Gallery({ photos, name }: { photos: PhotoT[]; name: string }) {
 
   return (
     <>
-      <div className="relative grid h-[58vh] min-h-[340px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-3xl sm:h-[68vh]">
-        {tile(0, "col-span-4 row-span-2 sm:col-span-2", "(min-width:640px) 50vw, 100vw", true)}
+      {/* Phones: swipeable full-width carousel of every photo */}
+      <div className="relative sm:hidden">
+        <div
+          className="no-scrollbar flex aspect-[4/3.4] snap-x snap-mandatory overflow-x-auto rounded-2xl"
+          onScroll={(e) => setSlide(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}
+        >
+          {photos.map((p, i) => (
+            <button key={p.src + i} type="button" onClick={() => setOpen(i)} className="relative h-full w-full shrink-0 snap-center bg-cream" aria-label={`Open photo ${i + 1} of ${photos.length}: ${p.alt}`}>
+              <Photo src={p.src} alt={p.alt} fill priority={i === 0} sizes="100vw" className="object-cover" />
+            </button>
+          ))}
+        </div>
+        <span className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-ink/70 px-3 py-1 text-xs text-ivory backdrop-blur" aria-live="polite">
+          {slide + 1} / {photos.length}
+        </span>
+        <span className="pointer-events-none absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5" aria-hidden="true">
+          {photos.map((_, i) => (
+            <span key={i} className={`h-1.5 rounded-full transition-all ${i === slide ? "w-5 bg-ivory" : "w-1.5 bg-ivory/50"}`} />
+          ))}
+        </span>
+      </div>
+
+      <div className="relative hidden h-[58vh] min-h-[340px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-3xl sm:grid sm:h-[68vh]">
+        {tile(0, "col-span-2 row-span-2", "(min-width:640px) 50vw, 100vw", true)}
         {tile(1, "hidden sm:block", "25vw")}
         {tile(2, "hidden sm:block", "25vw")}
         {tile(3, "hidden sm:block", "25vw")}
@@ -54,7 +86,7 @@ export function Gallery({ photos, name }: { photos: PhotoT[]; name: string }) {
               <Icon name="close" className="h-5 w-5" />
             </button>
           </div>
-          <div className="relative flex-1">
+          <div className="relative flex-1" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
             <Photo key={open} src={photos[open].src} alt={photos[open].alt} fill sizes="100vw" className="object-contain animate-fade" />
             <button type="button" onClick={() => go(-1)} className="absolute left-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-ink/60 hover:bg-ink" aria-label="Previous photo">
               <Icon name="arrow-left" className="h-5 w-5" />

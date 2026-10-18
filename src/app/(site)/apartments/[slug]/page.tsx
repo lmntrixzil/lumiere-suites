@@ -9,6 +9,7 @@ import { Price } from "@/components/Currency";
 import { Gallery } from "@/components/Gallery";
 import { Icon } from "@/components/icons/Icon";
 import { JsonLd } from "@/components/JsonLd";
+import { MobileReserveBar } from "@/components/MobileReserveBar";
 import { Reveal } from "@/components/Reveal";
 import { unavailableNights } from "@/lib/availability";
 import { getApartmentBySlug, getApartments, getCars, getSettings } from "@/lib/db";
@@ -94,7 +95,7 @@ export default async function ApartmentPage({ params }: Props) {
         <Gallery photos={apt.photos} name={apt.name} />
       </div>
 
-      <div className="container-x grid gap-14 pb-24 pt-12 lg:grid-cols-[1fr_400px]">
+      <div className="container-x grid grid-cols-1 gap-14 pb-24 pt-12 lg:grid-cols-[1fr_400px]">
         <div className="min-w-0">
           <p className="eyebrow text-bronze">
             {loc.name} · {apt.area}
@@ -138,7 +139,7 @@ export default async function ApartmentPage({ params }: Props) {
           </section>
 
           {/* Stay details */}
-          <section className="mt-16 grid gap-6 sm:grid-cols-2" aria-label="Stay details">
+          <section className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2" aria-label="Stay details">
             <div className="card p-6">
               <Icon name="clock" className="h-6 w-6 text-bronze" />
               <h3 className="mt-4 font-serif text-2xl">Check-in &amp; out</h3>
@@ -228,20 +229,12 @@ export default async function ApartmentPage({ params }: Props) {
       </div>
 
       {/* Mobile reserve bar */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between gap-3 border-t border-line bg-ivory/95 px-4 py-3 backdrop-blur lg:hidden">
-        <p>
-          <Price ngn={apt.nightlyRate} className="font-serif text-2xl" />
-          <span className="text-xs text-stone"> / night</span>
-        </p>
-        <a href="#book" className="btn-gold">
-          Check dates
-        </a>
-      </div>
+      <MobileReserveBar nightlyRate={apt.nightlyRate} />
 
       <section className="border-t border-line bg-cream/50 py-20">
         <div className="container-x">
           <h2 className="h-section">You may also like</h2>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {similar.map((a) => (
               <ApartmentCard key={a.id} apt={a} />
             ))}

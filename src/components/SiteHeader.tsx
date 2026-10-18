@@ -55,6 +55,7 @@ export function SiteHeader() {
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
               aria-controls="site-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               className={`inline-flex h-10 items-center gap-2 rounded-full border px-3.5 text-[0.68rem] font-medium uppercase tracking-[0.22em] transition ${
                 open ? "border-white/35 text-white" : pill
               }`}
@@ -103,9 +104,9 @@ export function SiteHeader() {
         aria-modal="true"
         aria-label="Site menu"
         hidden={!open}
-        className="fixed inset-0 z-40 overflow-y-auto bg-ink text-ivory animate-fade"
+        className="fixed inset-0 z-[45] overflow-y-auto overscroll-contain bg-ink text-ivory animate-fade"
       >
-        <div className="container-x grid min-h-full gap-12 pb-16 pt-32 lg:grid-cols-[1.4fr_1fr] lg:pt-40">
+        <div className="container-x grid grid-cols-1 min-h-full gap-12 pb-16 pt-32 lg:grid-cols-[1.4fr_1fr] lg:pt-40">
           <nav aria-label="Main">
             <ul className="space-y-1">
               {[{ href: "/", label: "Home" }, ...nav, { href: "/book", label: "Book now" }].map((l, i) => (

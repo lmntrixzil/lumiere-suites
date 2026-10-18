@@ -57,14 +57,14 @@ export default async function CarsPage() {
       </section>
 
       <section className="bg-ink py-20 text-ivory sm:py-28">
-        <div className="container-x grid gap-14 lg:grid-cols-2">
+        <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-2">
           <SectionHeading
             tone="dark"
             eyebrow="Airport transfers"
             title="Met at MMIA, every time"
             intro="Your chauffeur tracks your flight, waits at arrivals with a name board and helps with luggage. Delays never cost extra."
           />
-          <Reveal delay={150} className="grid gap-4 sm:grid-cols-2">
+          <Reveal delay={150} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {[
               ["plane", "Pickup or drop-off", <>Flat <Price key="p" ngn={settings.airportTransferFee} /> each way, any car in the fleet</>],
               ["clock", "Flight tracking", <>Add your flight number at checkout and we&apos;ll adjust to your landing time</>],
@@ -81,7 +81,7 @@ export default async function CarsPage() {
         </div>
       </section>
 
-      <section className="container-x grid gap-10 py-20 sm:py-28 lg:grid-cols-2">
+      <section className="container-x grid grid-cols-1 gap-10 py-20 sm:py-28 lg:grid-cols-2">
         <Reveal className="card p-8 sm:p-10">
           <p className="eyebrow text-bronze">Staying with us?</p>
           <h2 className="mt-4 font-serif text-4xl">Add a car to your apartment booking</h2>

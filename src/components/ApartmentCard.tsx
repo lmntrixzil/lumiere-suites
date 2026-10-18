@@ -10,7 +10,7 @@ export function ApartmentCard({ apt, query = "", priority = false }: { apt: Apar
   const href = `/apartments/${apt.slug}${query}`;
   return (
     <article className="group relative flex h-full flex-col">
-      <Link href={href} className="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-cream" aria-label={`${apt.name}, view apartment`}>
+      <Link href={href} className="relative block aspect-[6/5] overflow-hidden rounded-2xl bg-cream sm:aspect-[4/5]" aria-label={`${apt.name}, view apartment`}>
         <Photo
           src={apt.photos[0]?.src}
           alt={apt.photos[0]?.alt ?? apt.name}

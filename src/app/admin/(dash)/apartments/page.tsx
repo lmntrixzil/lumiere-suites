@@ -18,7 +18,7 @@ export default async function AdminApartments() {
           <Icon name="plus" className="h-4 w-4" /> Add apartment
         </Link>
       </div>
-      <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {apartments.map((a) => (
           <li key={a.id}>
             <Link href={`/admin/apartments/${a.id}`} className="block overflow-hidden rounded-2xl border border-line bg-white transition hover:border-ink">

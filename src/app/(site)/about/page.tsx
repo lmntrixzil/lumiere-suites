@@ -33,7 +33,7 @@ export default function AboutPage() {
         alt="Calm, open living room"
       />
       <section className="grid-lines py-24 sm:py-32">
-        <div className="container-x grid gap-14 lg:grid-cols-2">
+        <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-2">
           <Reveal>
             <p className="font-serif text-3xl font-light leading-snug sm:text-4xl">
               Lumière began with a simple frustration: arriving in Lagos to a beautiful apartment, then waiting an hour for a taxi, or losing power at midnight.
@@ -53,7 +53,7 @@ export default function AboutPage() {
       <section className="bg-ink py-24 text-ivory sm:py-32">
         <div className="container-x">
           <SectionHeading tone="dark" eyebrow="What makes Lumière different" title="Four promises we keep" />
-          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
+          <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
             {pillars.map(([icon, t, d], i) => (
               <Reveal key={t} delay={i * 100} className="bg-ink p-8 sm:p-10">
                 <Icon name={icon} className="h-8 w-8 text-gold" />
@@ -64,7 +64,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="container-x grid items-center gap-12 py-24 sm:py-32 lg:grid-cols-2">
+      <section className="container-x grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-2">
         <Reveal className="relative aspect-[4/5] overflow-hidden rounded-3xl">
           <Photo src="photo-1631049307264-da0ec9d70304" alt="Bedroom prepared for arrival" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
         </Reveal>

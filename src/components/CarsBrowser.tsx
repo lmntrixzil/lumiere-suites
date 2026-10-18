@@ -43,7 +43,7 @@ export function CarsBrowser({ cars }: { cars: Car[] }) {
             : "Self-drive requires a valid driver's licence, aged 25+, and a refundable deposit."}
       </p>
 
-      <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((c) => (
           <CarCard
             key={c.id}

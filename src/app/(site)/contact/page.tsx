@@ -20,7 +20,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero eyebrow="Contact" title={<>We&apos;d love to <em className="text-gold">hear from you</em></>} image="photo-1621293954908-907159247fc8" alt="Elegant lobby lounge" size="sm" />
-      <section className="container-x grid gap-12 py-16 sm:py-24 lg:grid-cols-[1fr_1.3fr]">
+      <section className="container-x grid grid-cols-1 gap-12 py-16 sm:py-24 lg:grid-cols-[1fr_1.3fr]">
         <div>
           <ul className="grid gap-3">
             {channels.map((c) => (

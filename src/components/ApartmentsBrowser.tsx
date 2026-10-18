@@ -5,7 +5,7 @@
  * Filters live in the URL so a filtered view can be shared.
  */
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { rangeIsFreeClient } from "@/lib/availability-client";
 import { locations } from "@/lib/site";
 import type { AmenityKey, Apartment } from "@/lib/types";
@@ -33,6 +33,17 @@ export function ApartmentsBrowser({ apartments, blocked, fixedLocation }: { apar
   const [sort, setSort] = useState(params.get("sort") ?? "featured");
   const [showFilters, setShowFilters] = useState(false);
   const wantsCar = params.get("car") === "1";
+
+  useEffect(() => {
+    if (!showFilters) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setShowFilters(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [showFilters]);
 
   const results = useMemo(() => {
     const list = apartments.filter(
@@ -149,7 +160,7 @@ export function ApartmentsBrowser({ apartments, blocked, fixedLocation }: { apar
   return (
     <div id="results" className="scroll-mt-24">
       {/* Search strip */}
-      <div className="card grid gap-4 p-4 sm:grid-cols-[1.6fr_1fr_auto] sm:items-center sm:p-5">
+      <div className="card grid grid-cols-1 gap-4 p-4 sm:grid-cols-[1.6fr_1fr_auto] sm:items-center sm:p-5">
         <DateRangeField value={dates} onChange={(v) => (setDates(v), (v.to || !v.from) && sync({ checkIn: v.from, checkOut: v.to }))} />
         <div className="flex items-center justify-between gap-3 sm:border-l sm:border-line sm:pl-5">
           <span>
@@ -175,7 +186,7 @@ export function ApartmentsBrowser({ apartments, blocked, fixedLocation }: { apar
         </div>
       </div>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-[260px_1fr]">
+      <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[260px_1fr]">
         <aside className="hidden lg:block" aria-label="Filters">
           <div className="sticky top-28">{filters}</div>
         </aside>
@@ -183,7 +194,7 @@ export function ApartmentsBrowser({ apartments, blocked, fixedLocation }: { apar
         {/* Mobile filter sheet */}
         {showFilters && (
           <div className="fixed inset-0 z-[60] bg-ink/50 lg:hidden" onClick={() => setShowFilters(false)}>
-            <div role="dialog" aria-modal="true" aria-label="Filters" className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-3xl bg-ivory p-6 animate-fade" onClick={(e) => e.stopPropagation()}>
+            <div role="dialog" aria-modal="true" aria-label="Filters" className="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto overscroll-contain rounded-t-3xl bg-ivory p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] animate-fade" onClick={(e) => e.stopPropagation()}>
               <div className="mb-6 flex items-center justify-between">
                 <p className="font-serif text-2xl">Filters</p>
                 <button type="button" onClick={() => setShowFilters(false)} aria-label="Close filters">
@@ -215,7 +226,7 @@ export function ApartmentsBrowser({ apartments, blocked, fixedLocation }: { apar
             </label>
           </div>
           {results.length ? (
-            <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
               {results.map((a, i) => (
                 <ApartmentCard key={a.id} apt={a} query={query} priority={i < 2} />
               ))}

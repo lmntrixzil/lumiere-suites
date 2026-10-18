@@ -251,7 +251,7 @@ export const seedCars: Car[] = [
   {
     id: "car-gle",
     slug: "mercedes-gle",
-    name: "Mercedes-Benz GLE 450",
+    name: "Mercedes-Benz GLE",
     category: "Executive SUV",
     seats: 5,
     transmission: "Automatic",
@@ -300,7 +300,7 @@ export const seedCars: Car[] = [
     category: "Executive coupé",
     seats: 4,
     transmission: "Automatic",
-    photo: p("1676222618736-65c42193b409", "Blue Mercedes-Benz E-Class Coupé"),
+    photo: p("1679049864217-d845dccae8dd", "Blue Mercedes-Benz E-Class Coupé"),
     rates: { hourly: 30000, daily: 160000, weekly: 960000 },
     chauffeurDailyFee: 25000,
     selfDrive: true,

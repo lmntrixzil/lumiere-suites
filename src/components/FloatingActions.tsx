@@ -36,7 +36,7 @@ export function FloatingActions() {
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
         className={`fixed right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#1F7A4D] text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.45)] transition duration-500 hover:scale-105 sm:right-6 ${hideOnPhone} ${
-          onCheckout ? "bottom-5" : "bottom-24 md:bottom-6"
+          onCheckout ? "bottom-24 lg:bottom-6" : "bottom-24 md:bottom-6"
         }`}
       >
         <WhatsAppIcon className="h-7 w-7" />
@@ -52,10 +52,10 @@ export function FloatingActions() {
       )}
 
       {!onCheckout && !onDetail && (
-        <div className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-ink/95 px-4 py-3 backdrop-blur transition duration-500 md:hidden ${hideOnPhone}`}>
+        <div className={`fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-ink/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur transition duration-500 md:hidden ${hideOnPhone}`}>
           <div className="flex items-center gap-3">
             <div className="min-w-0 flex-1">
-              <p className="truncate font-serif text-lg leading-tight text-ivory">Stay &amp; ride, booked together</p>
+              <p className="truncate font-serif text-lg leading-tight text-ivory">Stay &amp; ride, together</p>
               <p className="text-[0.7rem] text-ivory/60">Ikoyi · Lekki · Car on arrival</p>
             </div>
             <Link href="/book" className="btn-gold shrink-0 px-5">

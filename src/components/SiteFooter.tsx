@@ -7,7 +7,7 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-ink pb-28 pt-20 text-ivory md:pb-10">
       <div className="container-x">
-        <div className="grid gap-12 border-b border-white/10 pb-14 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-14 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
             <Logo />
             <p className="mt-6 max-w-xs font-serif text-2xl font-light italic text-ivory/85">{site.tagline}</p>
@@ -77,8 +77,9 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-col justify-between gap-4 pt-8 text-xs text-ivory/50 sm:flex-row">
           <p>© {new Date().getFullYear()} Lumière Suites Ltd. All rights reserved.</p>
-          <p className="tracking-[0.25em]">
-            [ {locations.ikoyi.coords} ] · [ {locations.lekki.coords} ]
+          <p className="flex flex-col gap-1 tracking-[0.25em] sm:flex-row sm:gap-3">
+            <span className="whitespace-nowrap">[ {locations.ikoyi.coords} ]</span>
+            <span className="whitespace-nowrap">[ {locations.lekki.coords} ]</span>
           </p>
         </div>
       </div>

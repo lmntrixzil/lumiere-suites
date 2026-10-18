@@ -74,7 +74,7 @@ export default async function LocationPage({ params }: Props) {
         </ul>
       </PageHero>
       <section className="container-x py-14">
-        <div className="mb-12 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
           <p className="text-[1.05rem] leading-[1.85] text-stone">{intros[slug]}</p>
           {from > 0 && (
             <p className="lg:text-right">

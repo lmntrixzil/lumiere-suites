@@ -55,7 +55,7 @@ export function CurrencyToggle({ tone = "light" }: { tone?: "light" | "dark" }) 
           type="button"
           aria-pressed={currency === c}
           onClick={() => setCurrency(c)}
-          className={`rounded-full px-3 py-1.5 transition ${currency === c ? "bg-gold text-ink" : "opacity-80 hover:opacity-100"}`}
+          className={`min-h-9 min-w-10 rounded-full px-3 py-2 transition ${currency === c ? "bg-gold text-ink" : "opacity-80 hover:opacity-100"}`}
         >
           {c === "NGN" ? "₦" : "$"}
           <span className="sr-only">{c}</span>

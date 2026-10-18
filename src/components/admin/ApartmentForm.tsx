@@ -62,7 +62,7 @@ export function ApartmentForm({ initial, isNew }: { initial: Apartment; isNew: b
       </div>
 
       <div className={section}>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className="label" htmlFor="name">Name</label>
             <input id="name" required value={a.name} onChange={(e) => (set("name", e.target.value), isNew && set("slug", slugify(e.target.value)))} className="field-box" />
